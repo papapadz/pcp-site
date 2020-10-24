@@ -21,6 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 
+	Route::get('logout', function() {
+		Auth::logout();
+		return redirect()->back();
+	});
 	Route::get('lecture', 'LectureController@index')->name('lecture');
 
 	Route::get('table-list', function () {

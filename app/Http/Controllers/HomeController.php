@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Setting;
+use App\Speaker;
+use App\Schedule;
 
 class HomeController extends Controller
 {
@@ -20,7 +23,16 @@ class HomeController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-    {
-        return view('pages.landing_page');
+    {   
+        $settings = Setting::pluck('value', 'key');
+        $speakers = Speaker::all();
+        $schedules = Schedule::with('speaker')
+            ->orderBy('start_time', 'asc')
+            ->get()
+            ->groupBy('day_number');
+
+        return view('home',compact(
+            'settings','speakers','schedules'
+        ));
     }
 }
