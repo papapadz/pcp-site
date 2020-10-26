@@ -21,7 +21,6 @@ class CreateSchedulesTable extends Migration
             $table->string('subtitle')->nullable();
             $table->timestamps();
             $table->bigInteger('speaker_id');
-            $table->string('meeting_id',100)->nullable();
             $table->softDeletes();
         });
     }
