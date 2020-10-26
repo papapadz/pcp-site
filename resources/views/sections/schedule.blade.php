@@ -13,8 +13,7 @@
       @endforeach
     </ul>
 
-    <h3 class="sub-heading">Voluptatem nulla veniam soluta et corrupti consequatur neque eveniet officia. Eius
-      necessitatibus voluptatem quis labore perspiciatis quia.</h3>
+    <h3 class="sub-heading">After each lecture a Question and Answer forum will be open for 15 minutes and Product Presentation for 5 minutes.</h3>
 
     <div class="tab-content row justify-content-center">
       @foreach($schedules as $key => $day)
@@ -30,6 +29,7 @@
                 @endif
                 <h4>{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h4>
                 <p>{{ $schedule->subtitle }}</p>
+                <button class="btn btn-sm btn-primary" style="align-center"><i class="fa fa-eye"></i> Watch</button>
               </div>
             </div>
           @endforeach

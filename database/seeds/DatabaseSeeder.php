@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             // MembersTableSeeder::class,
             // SettingSeeder::class,
             SchedulesTableSeeder::class,
-            SpeakersTableSeeder::class,
+            // SpeakersTableSeeder::class,
         ]);
     }
 }
