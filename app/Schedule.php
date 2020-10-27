@@ -29,4 +29,8 @@ class Schedule extends Model
     {
         return $this->belongsTo(Speaker::class, 'speaker_id');
     }
+
+    public function media() {
+        return $this->hasMany(Media::class,'schedule_id','id');
+    }
 }
