@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Member;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +51,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
+            'member_id' => ['required', 'string','unique:members'],
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'mobile_number' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,8 +69,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // $member = Member::create([
+        //     'member_id' => $data['member_id'],
+        //     'first_name' => $data['first_name'],
+        //     'middle_name' => $data['middle_name'],
+        //     'last_name' => $data['last_name'],
+        //     'mobile_number' => $data['mobile_number']
+        // ]);
+
         return User::create([
-            'name' => $data['name'],
+            'name' => 'Member',
+            'member_id' => Member::create($data)->id,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

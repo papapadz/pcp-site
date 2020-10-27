@@ -14,8 +14,9 @@ class CreateMediaTable extends Migration
     public function up()
     {
         /** types */
-        //1 - vimeo
-        //2 - jitsi
+        //1 - main
+        //2 - Q&A
+        //3 - Product Pres
         Schema::create('media', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('schedule_id');

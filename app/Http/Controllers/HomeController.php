@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Setting;
 use App\Speaker;
 use App\Schedule;
+use App\Media;
 
 class HomeController extends Controller
 {
@@ -34,5 +35,12 @@ class HomeController extends Controller
         return view('home',compact(
             'settings','speakers','schedules'
         ));
+    }
+
+    public function meeting($id) {
+
+        $media = Media::find($id);
+
+        return view('meeting')->with('url',$media->url);
     }
 }

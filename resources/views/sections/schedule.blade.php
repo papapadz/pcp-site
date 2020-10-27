@@ -29,7 +29,19 @@
                 @endif
                 <h4>{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h4>
                 <p>{{ $schedule->subtitle }}</p>
-                <button class="btn btn-sm btn-primary" style="align-center"><i class="fa fa-eye"></i> Watch</button>
+                  
+                @foreach($schedule->media as $media)
+                  @if($media->type==1)
+                  <a href="{{ url('meeting/'.$media->id) }}" class="btn btn-sm btn-primary" style="align-center">
+                    <i class="fa fa-film"></i> Watch</a>
+                  @elseif($media->type==2)
+                  <a href="{{ url('meeting/'.$media->id) }}" class="btn btn-sm btn-warning" style="align-center">
+                    <i class="fa fa-comments-o"></i> Q&A</a>
+                  @else
+                  <a href="{{ url('meeting/'.$media->id) }}" class="btn btn-sm btn-success" style="align-center">
+                    <i class="fa fa-folder-open-o"></i> Product Presentation</a>
+                  @endif
+                @endforeach
               </div>
             </div>
           @endforeach

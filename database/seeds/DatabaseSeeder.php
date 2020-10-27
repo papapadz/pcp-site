@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
             // UsersTableSeeder::class,
             // MembersTableSeeder::class,
             // SettingSeeder::class,
-            SchedulesTableSeeder::class,
+            //SchedulesTableSeeder::class,
             // SpeakersTableSeeder::class,
+            MediaTableSeeder::class
         ]);
     }
 }
