@@ -20,7 +20,6 @@ class MembersTableSeeder extends Seeder
             'prc' => '0123456',
             'category' => 'Life Member',
             'status' => true,
-            'updated_by' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
