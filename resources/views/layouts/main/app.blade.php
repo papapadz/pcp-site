@@ -41,7 +41,7 @@
   <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
   <script src="{{ asset('lib/venobox/venobox.min.js') }}"></script>
   <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-
+  <script src="{{ asset('material') }}/js/plugins/moment.min.js"></script>
   <!-- Contact Form JavaScript File -->
   <script src="{{ asset('lib/js/contactform.js') }}"></script>
 

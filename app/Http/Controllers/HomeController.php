@@ -8,15 +8,6 @@ use App\Media;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -41,6 +32,6 @@ class HomeController extends Controller
 
         $media = Media::find($id);
 
-        return view('meeting')->with('url',$media->url);
+        return view('meeting')->with('media',$media);
     }
 }

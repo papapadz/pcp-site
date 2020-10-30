@@ -17,11 +17,6 @@
             <i class="material-icons">home</i> Home
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{ route('lecture') }}" class="nav-link">
-            <i class="material-icons">chrome_reader_mode</i> Lectures
-          </a>
-        </li>
         {{-- <li class="nav-item{{ $activePage == 'register' ? ' active' : '' }}">
           <a href="{{ route('register') }}" class="nav-link">
             <i class="material-icons">person_add</i> {{ __('Register') }}
