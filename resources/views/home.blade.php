@@ -6,15 +6,15 @@
 <main id="main">
   @include('sections.about')
 
-  {{-- @include('sections.speakers') --}}
-
   @include('sections.schedule')
 
+  @include('sections.speakers')
+  
   {{-- @include('sections.venues') --}}
 
   {{-- @include('sections.hotels') --}}
 
-  @include('sections.gallery')
+  <!-- @include('sections.gallery') -->
 
   @include('sections.sponsors')
 
@@ -24,6 +24,6 @@
 
   {{-- @include('sections.buy_ticket') --}}
 
-  @include('sections.contact')
+  <!-- @include('sections.contact') -->
 </main>
 @endsection
