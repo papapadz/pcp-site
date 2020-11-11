@@ -5,6 +5,7 @@ use App\Setting;
 use App\Speaker;
 use App\Schedule;
 use App\Media;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -22,9 +23,10 @@ class HomeController extends Controller
             ->orderBy('start_time', 'asc')
             ->get()
             ->groupBy('day_number');
+        $user_pending = User::where('email_verified_at',null)->count();
 
         return view('home',compact(
-            'settings','speakers','schedules'
+            'settings','speakers','schedules','user_pending'
         ));
     }
 

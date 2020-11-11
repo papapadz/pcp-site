@@ -24,6 +24,6 @@
 
   {{-- @include('sections.buy_ticket') --}}
 
-  @include('sections.contact')
+  {{-- @include('sections.contact') --}}
 </main>
 @endsection

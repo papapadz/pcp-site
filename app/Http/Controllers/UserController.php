@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Member;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -63,6 +64,19 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User  $user)
     {
+        $user->update([
+            'email_verified_at' => Carbon::now()->toDateTimeString()
+        ]);
+        $user->member->update([
+            'member_id' => $request->member_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'middle_name' => $request->middle_name,
+            'mobile_number' => $request->mobile_number,
+            'prc' => $request->prc,
+            'category' => $request->category,
+            'remarks' => $request->remarks,
+        ]);
         $hasPassword = $request->get('password');
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
@@ -78,10 +92,12 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(User  $user)
+    public function destroy($user_id)
     {
+        $user = User::find($user_id);
+        $user->member->update(['status' => 0]);
         $user->delete();
-
+    
         return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
     }
 }

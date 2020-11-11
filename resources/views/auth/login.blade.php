@@ -6,7 +6,7 @@
     <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
       <h3>{{ __('Log in access video lectures, participate in Q&As, raffles and more.') }} </h3>
     </div>
-    <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+    <div class="col-lg-4 col-md-8 col-sm-8 ml-auto mr-auto">
       <form class="form" method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -65,7 +65,6 @@
               </label>
             </div> --}}
           </div>
-          <hr>
           <div class="card-footer justify-content-center">
             <button type="submit" class="btn btn-primary btn-round">{{ __('Lets Go') }}</button>
           </div>
@@ -79,11 +78,11 @@
                 </a>
             @endif
         </div> --}}
-        <div class="col-6 text-right">
-            <a href="{{ route('register') }}" class="text-light">
-                <small>{{ __('Create new account') }}</small>
-            </a>
-        </div>
+        <a href="{{ route('register') }}" class="text-light">
+          <span class="material-icons">
+            stars
+            </span>Click here to register and join the event!
+      </a>
       </div>
     </div>
   </div>

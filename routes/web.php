@@ -24,12 +24,13 @@ Route::group(['middleware' => ['auth']], function () {
 		return redirect()->back();
 	});
 	
-	Route::get('dashboard', function() {
-		return view('dashboard');
-	});
 	Route::get('meeting/{id}', 'HomeController@meeting');
 	
-
+	Route::group(['middleware' => ['check.role']], function() {
+		Route::resource('user', 'UserController', ['except' => ['show']]);
+		Route::get('user/delete/account/{user_id}','UserController@destroy')->name('user.delete');
+	});
+	
 	// Route::get('table-list', function () {
 	// 	return view('pages.table_list');
 	// })->name('table');
@@ -57,11 +58,4 @@ Route::group(['middleware' => ['auth']], function () {
 	// Route::get('upgrade', function () {
 	// 	return view('pages.upgrade');
 	// })->name('upgrade');
-});
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });

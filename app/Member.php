@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
+    protected $primaryKey = 'member_id';
+    protected $casts = [
+        'member_id' => 'string',
+    ];
     protected $fillable = [
         'member_id',
         'first_name',
@@ -19,6 +23,6 @@ class Member extends Model
     ];
 
     public function user() {
-        return $this->belongsTo(User::class,'member_id','id');
+        return $this->belongsTo(User::class,'member_id','member_id');
     }
 }

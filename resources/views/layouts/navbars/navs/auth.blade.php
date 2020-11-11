@@ -12,9 +12,9 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item ">
           <a href="{{ route('home') }}" class="nav-link">
-            <i class="material-icons">home</i> Home
+            <i class="material-icons">location_on</i> {{ __('Back to Event') }}
           </a>
         </li>
         {{-- <li class="nav-item{{ $activePage == 'register' ? ' active' : '' }}">
@@ -27,11 +27,7 @@
             <i class="material-icons">fingerprint</i> {{ __('Login') }}
           </a>
         </li> --}}
-        <li class="nav-item ">
-          <a href="{{ route('profile.edit') }}" class="nav-link">
-            <i class="material-icons">face</i> {{ __('Profile') }}
-          </a>
-        </li>
+        
       </ul>
     </div>
   </div>

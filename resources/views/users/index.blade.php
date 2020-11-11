@@ -7,8 +7,8 @@
         <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title ">{{ __('Users') }}</h4>
-                <p class="card-category"> {{ __('Here you can manage users') }}</p>
+                <h4 class="card-title ">{{ __('List of Registered Attendees') }}</h4>
+              <p class="card-category"> {{ __('Awaiting Confirmations: ') }} <b>{{ $users->where('email_verified_at','=',null)->count() }}</b></p>
               </div>
               <div class="card-body">
                 @if (session('status'))
@@ -23,22 +23,28 @@
                     </div>
                   </div>
                 @endif
-                <div class="row">
+                {{-- <div class="row">
                   <div class="col-12 text-right">
                     <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
                   </div>
-                </div>
+                </div> --}}
                 <div class="table-responsive">
                   <table class="table">
                     <thead class=" text-primary">
                       <th>
+                        {{ __('Member ID') }}
+                    </th>
+                      <th>
                           {{ __('Name') }}
                       </th>
+                      <th>
+                        {{ __('Contact No.') }}
+                    </th>
                       <th>
                         {{ __('Email') }}
                       </th>
                       <th>
-                        {{ __('Creation date') }}
+                        {{ __('Status') }}
                       </th>
                       <th class="text-right">
                         {{ __('Actions') }}
@@ -48,13 +54,23 @@
                       @foreach($users as $user)
                         <tr>
                           <td>
-                            {{ $user->name }}
+                            {{ $user->member->member_id }}
+                          </td>
+                          <td>
+                            {{ $user->member->last_name }}, {{ $user->member->first_name }} {{ $user->member->middle_name }}
+                          </td>
+                          <td>
+                            {{ $user->member->mobile_number }}
                           </td>
                           <td>
                             {{ $user->email }}
                           </td>
                           <td>
-                            {{ $user->created_at->format('Y-m-d') }}
+                            @if($user->email_verified_at!=null)
+                            <span class="text-success"><i class="material-icons">check_circle</i> Confirmed!</span>
+                            @else
+                              <span class="text-danger"><i class="material-icons">hourglass_empty</i> For confirmation...</span>
+                            @endif
                           </td>
                           <td class="td-actions text-right">
                             @if ($user->id != auth()->id())
@@ -63,19 +79,23 @@
                                   @method('delete')
                               
                                   <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
-                                    <i class="material-icons">edit</i>
+                                    Open <i class="material-icons">send</i>
                                     <div class="ripple-container"></div>
                                   </a>
-                                  <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
+                                  {{-- <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
+                                    <i class="material-icons">close</i>
+                                    <div class="ripple-container"></div>
+                                  </button> --}}
+                                  {{-- <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
                                       <i class="material-icons">close</i>
                                       <div class="ripple-container"></div>
-                                  </button>
+                                  </button> --}}
                               </form>
                             @else
-                              <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('profile.edit') }}" data-original-title="" title="">
-                                <i class="material-icons">edit</i>
-                                <div class="ripple-container"></div>
-                              </a>
+                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
+                              Open <i class="material-icons">send</i>
+                              <div class="ripple-container"></div>
+                            </a>
                             @endif
                           </td>
                         </tr>
