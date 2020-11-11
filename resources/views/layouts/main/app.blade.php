@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>{{ $settings['title'] }}</title>
+  <title>PCP Ilocos-Abra Chapter</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Google Fonts -->
