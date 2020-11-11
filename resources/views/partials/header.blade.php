@@ -20,10 +20,11 @@
         <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#hotels">Hotels</a></li> --}}
         <!-- <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#gallery">Gallery</a></li> -->
         <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#supporters">Sponsors</a></li>
-        <li><a href="{{ url('user') }}">Dashboard</a>
+        <li>
+          <a href="{{ url('user') }}">Dashboard 
           @if($user_pending>0)
-            <span class="badge bg-success p-1">{{$user_pending}}</span>
-          @endif
+          <span class="badge bg-success p-1">{{$user_pending}}</span>
+          @endif</a>
         </li>
         {{-- <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#contact">Contact</a></li> --}}
         <li class="buy-tickets"><a href="/logout">Log Out</a></li>
