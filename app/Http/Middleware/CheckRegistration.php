@@ -18,7 +18,7 @@ class CheckRegistration
     {
         if(Auth::user()->email_verified_at==null) {
             Auth::logout();
-            return redirect()->back();
+            return redirect()->back()->with('not_verified','error');
         }
         return $next($request);
     }

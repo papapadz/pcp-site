@@ -32,8 +32,10 @@ class HomeController extends Controller
 
     public function meeting($id) {
 
+        $settings = Setting::pluck('value', 'key');
         $media = Media::find($id);
 
-        return view('meeting')->with('media',$media);
+        return view('meeting', compact('media','settings'));
     }
+
 }

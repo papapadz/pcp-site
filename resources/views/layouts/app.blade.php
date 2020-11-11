@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>PCP</title>
+    <title>PCP Ilocos-Abra Chapter</title>
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('material') }}/img/favicon.png">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -19,6 +19,7 @@
     @stack('css')
     </head>
     <body class="{{ $class ?? '' }}">
+    
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -102,6 +103,7 @@
             </ul>
           </div>
         </div> --}}
+    </body>
         <!--   Core JS Files   -->
         <script src="{{ asset('material') }}/js/core/jquery.min.js"></script>
         <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
@@ -146,6 +148,22 @@
         {{-- <!-- Material Dashboard DEMO methods, don't include it in your project! -->
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script> --}}
+        <script>
+        function showNotification(from, align){
+
+$.notify({
+    icon: "add_alert",
+    message: "Welcome to <b>Material Dashboard Pro</b> - a beautiful freebie for every web developer."
+
+},{
+    type: 'success',
+    timer: 4000,
+    placement: {
+        from: from,
+        align: align
+    }
+});
+}
+</script>
         @stack('js')
-    </body>
 </html>
