@@ -34,8 +34,9 @@ class HomeController extends Controller
 
         $settings = Setting::pluck('value', 'key');
         $media = Media::find($id);
+        $user_pending = User::where('email_verified_at',null)->count();
 
-        return view('meeting', compact('media','settings'));
+        return view('meeting', compact('media','settings','user_pending'));
     }
 
 }
