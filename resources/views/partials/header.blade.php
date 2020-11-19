@@ -27,7 +27,7 @@
           @endif</a>
         </li>
         {{-- <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#contact">Contact</a></li> --}}
-        <li class="buy-tickets"><a href="/logout">Log Out</a></li>
+        <li class="buy-tickets"><a href="{{ url('logout') }}">Log Out</a></li>
       </ul>
     </nav>
   </div>
