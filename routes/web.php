@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
 	});
 	
 	Route::get('meeting/{id}', 'HomeController@meeting');
+	Route::get('event/{id}','HomeController@event');
 	
 	Route::group(['middleware' => ['check.role']], function() {
 		Route::resource('user', 'UserController', ['except' => ['show']]);

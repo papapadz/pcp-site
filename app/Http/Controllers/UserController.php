@@ -6,6 +6,7 @@ use App\User;
 use App\Member;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -64,6 +65,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User  $user)
     {
+        
         $user->update([
             'email_verified_at' => Carbon::now()->toDateTimeString()
         ]);

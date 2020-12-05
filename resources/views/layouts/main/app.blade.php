@@ -17,9 +17,11 @@
   <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
   <link href="{{ asset('lib/venobox/venobox.css') }}" rel="stylesheet">
   <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-
+  <link href="{{ asset('lib/css/hover-min.css') }}" rel="stylesheet">
   <!-- Main Stylesheet File -->
   <link href="{{ asset('lib/css/style.css') }}" rel="stylesheet">
+
+  @yield('styles')
 </head>
 
 <body>

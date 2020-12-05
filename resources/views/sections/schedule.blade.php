@@ -1,3 +1,114 @@
+@section('styles')
+<style>
+:root{
+  --background-dark: #2d3548;
+  --text-light: rgba(255,255,255,0.6);
+  --text-lighter: rgba(255,255,255,0.9);
+  --spacing-s: 8px;
+  --spacing-m: 16px;
+  --spacing-l: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 64px;
+  --width-container: 1200px;
+}
+
+*{
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hero-section{
+  align-items: flex-start;
+  display: flex;
+  min-height: 100%;
+  justify-content: center;
+  padding: var(--spacing-xxl) var(--spacing-l);
+}
+
+.card-grid{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-column-gap: var(--spacing-l);
+  grid-row-gap: var(--spacing-l);
+  max-width: var(--width-container);
+  width: 100%;
+}
+
+@media(min-width: 540px){
+  .card-grid{
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+@media(min-width: 960px){
+  .card-grid{
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+.card{
+  list-style: none;
+  position: relative;
+}
+
+.card:before{
+  content: '';
+  display: block;
+  padding-bottom: 150%;
+  width: 100%;
+}
+
+.card__background{
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--spacing-l);
+  bottom: 0;
+  filter: brightness(0.75) saturate(1.2) contrast(0.85);
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform-origin: center;
+  trsnsform: scale(1) translateZ(0);
+  transition: 
+    filter 200ms linear,
+    transform 200ms linear;
+}
+
+.card:hover .card__background{
+  transform: scale(1.05) translateZ(0);
+}
+
+.card-grid:hover > .card:not(:hover) .card__background{
+  filter: brightness(0.5)  contrast(1.2) blur(20px);
+}
+
+.card__content{
+  left: 0;
+  padding: var(--spacing-l);
+  position: absolute;
+  top: 0;
+}
+
+.card__category{
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-s);
+  text-transform: uppercase;
+}
+
+.card__heading{
+  color: var(--text-lighter);
+  font-size: 1.9rem;
+  text-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+  line-height: 1.4;
+  word-spacing: 100vw;
+}
+</style>
+@endsection
+
 <section id="schedule" class="section-with-bg">
   <div class="container wow fadeInUp">
     <div class="section-header">
@@ -17,36 +128,28 @@
 
     <div class="tab-content row justify-content-center">
       @foreach($schedules as $key => $day)
-        <div role="tabpanel" class="col-lg-9 tab-pane fade{{ $key === 1 ? ' show active' : '' }}" id="day-{{ $key }}">
+        <div role="tabpanel" class="col tab-pane fade{{ $key === 1 ? ' show active' : '' }}" id="day-{{ $key }}">
+          <section class="hero-section">
+            <div class="card-grid">
           @foreach($day as $schedule)
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>{{ \Carbon\Carbon::parse($schedule->start_time)->format("h:i A") }}</time></div>
-              <div class="col-md-10">
-                @if($schedule->speaker)
-                  <div class="speaker">
-                    {{-- <img src="{{ $schedule->speaker->photo->getUrl() }}" alt="{{ $schedule->speaker->name }}"> --}}
-                  </div>
-                @endif
-                <h4>{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h4>
-                <p>{{ $schedule->subtitle }}</p>
-                  
-                @foreach($schedule->media as $media)
-                  @if($media->type==1)
-                  <a href="{{ url('meeting/'.$media->id) }}" class="btn btn-sm btn-primary" style="align-center">
-                    <i class="fa fa-film"></i> Watch</a>
-                  @elseif($media->type==2)
-                  <a href="{{ url('meeting/'.$media->id) }}" class="btn btn-sm btn-warning" style="align-center">
-                    <i class="fa fa-comments-o"></i> Q&A</a>
-                  @else
-                  <a href="{{ url('meeting/'.$media->id) }}" class="btn btn-sm btn-success" style="align-center">
-                    <i class="fa fa-folder-open-o"></i> Product Presentation</a>
-                  @endif
-                @endforeach
-              </div>
-            </div>
+              <a class="card" href="{{ url('event/'.$schedule->id) }}">
+                <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+                <div class="card__content">
+                  <p class="card__category"><time>{{ \Carbon\Carbon::parse($schedule->start_time)->format("h:i A") }}</time></p>
+                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                </div>
+              </a>
           @endforeach
+            </div>
+        </section>
         </div>
       @endforeach
     </div>
   </div>
 </section>
+
+@section('scripts')
+<script>
+  
+</script>
+@endsection

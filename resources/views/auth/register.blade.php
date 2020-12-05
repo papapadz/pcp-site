@@ -22,7 +22,7 @@
                           <i class="material-icons">menu</i>
                       </span>
                     </div>
-                    <input maxlength="10" type="text" name="member_id" class="form-control" placeholder="{{ __('Member ID') }}" value="{{ old('member_id') }}" required>
+                    <input maxlength="10" type="text" name="member_id" class="form-control" placeholder="{{ __('Member ID (Leave blank if you have no Member ID)') }}" value="{{ old('member_id') }}" >
                   </div>
                   @if ($errors->has('member_id'))
                     <div id="member-id-error" class="error text-danger pl-3" for="member_id" style="display: block;">

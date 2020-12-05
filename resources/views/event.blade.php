@@ -13,13 +13,11 @@ strong {
 }
 
 .canvas-wrapper {
-  display: -webkit-box;
-  display: flex;
+  display: -webkit-inline-box;
   -webkit-box-align: center;
           align-items: center;
   -webkit-box-pack: center;
           justify-content: center;
-  height: 100%;
 }
 .canvas-wrapper .canvas + .canvas {
   margin-left: 40px;
@@ -101,7 +99,7 @@ strong {
           transform: translateX(-80px);
   -webkit-transition: all 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
   transition: all 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
-  color: black;
+  color:crimson;
 }
 .canvas_copy_title:nth-child(1) {
   -webkit-transition-delay: 0.1s;
@@ -229,10 +227,11 @@ strong {
 
 @section('content')
 <section id="intro">
-  <div class="intro-container wow fadeIn" id="meet">
-    
-    <div class="canvas-wrapper">
-      <a href="#" class="canvas">
+  <div class="intro-container fadeIn" id="meet">
+    <div class="row">
+    @foreach($schedule->media as $media)
+    <div class="canvas-wrapper col">
+      <a href="{{ url('meeting/'.$media->id) }}" class="canvas">
         <div class="canvas_border">
           <svg>
             <defs><linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:rgb(253,137,68);stop-opacity:1"></stop><stop offset="100%" style="stop-color:rgb(153,75,23);stop-opacity:1"></stop></linearGradient><linearGradient id="grad-red" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D34F48"></stop><stop offset="100%" stop-color="#772522"></stop></linearGradient></defs>
@@ -240,32 +239,36 @@ strong {
           </svg>
         </div>
         <div class="canvas_img-wrapper">
-          <img class="canvas_img" src="https://blog.codepen.io/wp-content/uploads/2012/06/Button-Black-Large.png" alt="">
+            <img class="canvas_img" 
+            @if($media->type==1)
+                src="{{ url('lib/img/video.png') }}" 
+            @elseif($media->type==2)
+                src="{{ url('lib/img/qanda.png') }}" 
+            @else
+                src="{{ url('lib/img/product.png') }}" 
+            @endif
+                
+            alt="">
         </div>
         <div class="canvas_copy canvas_copy--left">
-          <span class="canvas_copy_subtitle">Heading</span>
-          <strong class="canvas_copy_title">Hello</strong>
-          <strong class="canvas_copy_title">World</strong>
-          <span class="canvas_copy_details">Details and stuff</span>
+          {{-- <span class="canvas_copy_subtitle">Heading</span> --}}
+          {{-- <strong class="canvas_copy_title">Hello</strong> --}}
+          
+            @if($media->type==1)
+                <strong class="canvas_copy_title">Watch</strong>
+                <strong class="canvas_copy_title">Video</strong>
+            @elseif($media->type==2)
+                <strong class="canvas_copy_title">Question &</strong>
+                <strong class="canvas_copy_title">Answer</strong>
+            @else
+                <strong class="canvas_copy_title">Product</strong>
+                <strong class="canvas_copy_title">Presentation</strong>
+            @endif
+          {{-- <span class="canvas_copy_details">Details and stuff</span> --}}
         </div>
       </a>
-      <a href="#" class="canvas">
-        <div class="canvas_border">
-          <svg>
-            <defs><linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:rgb(253,137,68);stop-opacity:1"></stop><stop offset="100%" style="stop-color:rgb(153,75,23);stop-opacity:1"></stop></linearGradient><linearGradient id="grad-red" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D34F48"></stop><stop offset="100%" stop-color="#772522"></stop></linearGradient></defs>
-            <rect id="rect-grad" class="rect-gradient" fill="none" stroke="url(#grad-orange)" stroke-linecap="square" stroke-width="4" stroke-miterlimit="30" width="100%" height="100%"></rect>
-          </svg>
-        </div>
-        <div class="canvas_img-wrapper">
-          <img class="canvas_img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/249772/Twitter_Logo_Blue.png" alt="">
-        </div>
-        <div class="canvas_copy">
-          <span class="canvas_copy_subtitle">Heading</span>
-          <strong class="canvas_copy_title">Hello</strong>
-          <strong class="canvas_copy_title">World</strong>
-          <span class="canvas_copy_details">Details and stuff</span>
-        </div>
-      </a>
+    </div>
+    @endforeach
     </div>
       {{-- @if($media->type==2)
       @include('jitsi')

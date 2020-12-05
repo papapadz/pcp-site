@@ -30,6 +30,13 @@ class HomeController extends Controller
         ));
     }
 
+    public function event($id) {
+        $settings = Setting::pluck('value', 'key');
+        $schedule = Schedule::find($id);
+        
+        return view('event', compact('settings','schedule'));
+    }
+
     public function meeting($id) {
 
         $settings = Setting::pluck('value', 'key');

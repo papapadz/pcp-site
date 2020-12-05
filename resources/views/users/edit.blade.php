@@ -126,11 +126,12 @@
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Category') }}</label>
                   <div class="col-sm-7">
-                    <select class="form-control">
+                    <select name="category" class="form-control">
                       <option @if($user->member->category=="Life Member") selected @endif value="Life Member">Life Member</option>
                       <option @if($user->member->category=="Regular Fellow") selected @endif value="Regular Fellow">Regular Fellow</option>
                       <option @if($user->member->category=="Diplomate") selected @endif value="Diplomate">Diplomate</option>
                       <option @if($user->member->category=="Member") selected @endif value="Member">Member</option>
+                      <option @if($user->member->category=="Participant") selected @endif value="Participant">Participant</option>
                     </select>
                   </div>
                 </div>
@@ -176,7 +177,7 @@
                   <button type="submit" class="btn btn-success">{{ __('Confirm') }}</button>
                 @endif
                 
-                <a onclick="confirm('Are you sure you want to delete this user?')" href="{{ route('user.delete',['user_id' => $user->id]) }}" class="btn btn-danger">{{ __('Delete')}}</a>
+                <a onclick="return confirm('Are you sure you want to delete this user?')" href="{{ route('user.delete',['user_id' => $user->id]) }}" class="btn btn-danger">{{ __('Delete')}}</a>
               </div>
             </div>
           </form>

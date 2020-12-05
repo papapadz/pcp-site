@@ -52,7 +52,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             // 'name' => ['required', 'string', 'max:255'],
-            'member_id' => ['required', 'string','unique:members'],
+            //'member_id' => ['string','unique:members'],
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'mobile_number' => ['required', 'string'],
@@ -76,10 +76,19 @@ class RegisterController extends Controller
         //     'last_name' => $data['last_name'],
         //     'mobile_number' => $data['mobile_number']
         // ]);
+        $member_id=$data['member_id'];
+        if($member_id==null) {
+            $member_id = randomStr(10);
+            $data = array_merge($data, array(
+                'member_id' => $member_id
+            ));
+        }
+            
+        Member::create($data);
 
         return User::create([
             //'name' => 'Member',
-            'member_id' => Member::create($data)->id,
+            'member_id' => $member_id,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

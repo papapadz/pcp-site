@@ -26,6 +26,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
+            
             'email' => [
                 'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
             ],
