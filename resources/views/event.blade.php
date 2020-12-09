@@ -3,8 +3,12 @@
 @section('styles')
 <style>
 @import url("https://fonts.googleapis.com/css?family=Lato:300,900");
-*, :after, :before {
+html {
   box-sizing: border-box;
+}
+
+*, :after, :before {
+  box-sizing: inherit;
 }
 
 
@@ -13,11 +17,12 @@ strong {
 }
 
 .canvas-wrapper {
-  display: -webkit-inline-box;
+  display: -webkit-box;
   -webkit-box-align: center;
           align-items: center;
   -webkit-box-pack: center;
           justify-content: center;
+          
 }
 .canvas-wrapper .canvas + .canvas {
   margin-left: 40px;
@@ -25,10 +30,10 @@ strong {
 
 .canvas {
   position: relative;
-  display: block;
+  
   width: 400px;
   height: 400px;
-  padding: 20px;
+  
   color: inherit;
   text-decoration: none;
 }
@@ -230,7 +235,7 @@ strong {
   <div class="intro-container fadeIn" id="meet">
     <div class="row">
     @foreach($schedule->media as $media)
-    <div class="canvas-wrapper col">
+    <div class="canvas-wrapper">
       <a href="{{ url('meeting/'.$media->id) }}" class="canvas">
         <div class="canvas_border">
           <svg>
