@@ -3,26 +3,21 @@
 @section('styles')
 <style>
 @import url("https://fonts.googleapis.com/css?family=Lato:300,900");
-html {
+*, :after, :before {
   box-sizing: border-box;
 }
-
-*, :after, :before {
-  box-sizing: inherit;
-}
-
-
 strong {
   font-weight: 900;
 }
 
 .canvas-wrapper {
   display: -webkit-box;
+  display: flex;
   -webkit-box-align: center;
           align-items: center;
   -webkit-box-pack: center;
           justify-content: center;
-          
+  height: 100%;
 }
 .canvas-wrapper .canvas + .canvas {
   margin-left: 40px;
@@ -30,10 +25,10 @@ strong {
 
 .canvas {
   position: relative;
-  
+  display: block;
   width: 400px;
   height: 400px;
-  
+  padding: 20px;
   color: inherit;
   text-decoration: none;
 }
@@ -94,17 +89,17 @@ strong {
 }
 
 .canvas_copy--left {
-  left: -25%;
+  left: 10%;
 }
 
 .canvas_copy_title {
-  font-size: 62px;
+  font-size: 40px;
   display: block;
   -webkit-transform: translateX(-80px);
           transform: translateX(-80px);
   -webkit-transition: all 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
   transition: all 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
-  color:crimson;
+  color: orangered;
 }
 .canvas_copy_title:nth-child(1) {
   -webkit-transition-delay: 0.1s;
@@ -226,6 +221,57 @@ strong {
   }
 }
 
+@media only screen and (max-width: 1366px) {
+ 
+ .canvas-wrapper {
+   transform: scale(0.8);
+ }
+}
+
+@media only screen and (max-width: 1080px) {
+ 
+ .canvas-wrapper {
+   transform: scale(0.75);
+ }
+}
+
+@media only screen and (max-width: 1020px) {
+ 
+ .canvas-wrapper {
+   transform: scale(0.7);
+ }
+}
+
+@media only screen and (max-width: 900px) {
+ 
+ .canvas-wrapper {
+   transform: scale(0.55);
+ }
+}
+
+@media only screen and (max-width: 750px) {
+ 
+ .canvas-wrapper {
+   transform: scale(0.5);
+ }
+}
+
+@media only screen and (max-width: 640px) {
+ 
+  .canvas-wrapper {
+    transform: scale(0.45);
+  }
+}
+
+@media only screen and (max-width: 600) {
+ 
+ .canvas-wrapper {
+   display: table-row-group;
+ }
+ .canvas {
+   display: table-row;
+ }
+}
 
 </style>
 @endsection
@@ -233,9 +279,8 @@ strong {
 @section('content')
 <section id="intro">
   <div class="intro-container fadeIn" id="meet">
-    <div class="row">
-    @foreach($schedule->media as $media)
     <div class="canvas-wrapper">
+      @foreach($schedule->media as $media)
       <a href="{{ url('meeting/'.$media->id) }}" class="canvas">
         <div class="canvas_border">
           <svg>
@@ -272,14 +317,13 @@ strong {
           {{-- <span class="canvas_copy_details">Details and stuff</span> --}}
         </div>
       </a>
-    </div>
     @endforeach
     </div>
+  </div>
       {{-- @if($media->type==2)
       @include('jitsi')
     @else
       @include('video')
     @endif --}}
-  </div>
 </section>
 @endsection
