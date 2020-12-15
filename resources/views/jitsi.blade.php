@@ -2,9 +2,11 @@
 <script>
     var domain = "meet.jit.si";
     var options = {
-        roomName: "adouiaspoduoapsdiou213213asd",
+        roomName: "{{ $media->url }}",
         parentNode: document.querySelector('#meet'),
-        configOverwrite: {},
+        configOverwrite: {
+            prejoinPageEnabled: false,
+        },
         interfaceConfigOverwrite: {
             // filmStripOnly: true
             HIDE_INVITE_MORE_HEADER: true,

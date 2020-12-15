@@ -33,8 +33,9 @@ class HomeController extends Controller
     public function event($id) {
         $settings = Setting::pluck('value', 'key');
         $schedule = Schedule::find($id);
-        
-        return view('event', compact('settings','schedule'));
+        $user_pending = User::where('email_verified_at',null)->count();
+
+        return view('event', compact('settings','schedule','user_pending'));
     }
 
     public function meeting($id) {
