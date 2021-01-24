@@ -34,6 +34,7 @@
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
   <!-- JavaScript Libraries -->
+
   <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script>
   <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -44,6 +45,7 @@
   <script src="{{ asset('lib/venobox/venobox.min.js') }}"></script>
   <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
   <script src="{{ asset('material') }}/js/plugins/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Contact Form JavaScript File -->
   <script src="{{ asset('lib/js/contactform.js') }}"></script>
 

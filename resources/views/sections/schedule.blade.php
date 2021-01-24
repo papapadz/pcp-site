@@ -132,13 +132,38 @@
           <section class="hero-section">
             <div class="card-grid">
           @foreach($day as $schedule)
-              <a class="card" href="{{ url('event/'.$schedule->id) }}">
-                <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
-                <div class="card__content">
+            @if(Carbon\Carbon::now() >= Carbon\Carbon::parse($schedule->start_time))
+              <a id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
+            @else
+              <a style="display: none" id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
+              <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+              <div class="card__content">
+                  <p class="card__category"><time>OPEN NOW</time></p>
+                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                  </div>
+              </a>
+              
+              <a class="card" id="card-close-{{ $schedule->id }}" onclick="notyet()" href="javascript:void(0)">
+              <div class="card__background" style="background-image: url(https://cdn4.vectorstock.com/i/1000x1000/71/73/clock-icon-isolated-on-grey-background-time-icon-vector-20907173.jpg)"></div>
+              <div class="card__content">
+                  <p class="card__category"><time>Starts on {{ \Carbon\Carbon::parse($schedule->start_time)->format("g:i A") }}</time></p>
+                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                  </div>
+                </a>
+            @endif
+
+                
+              <!-- @if(Carbon\Carbon::now() >= Carbon\Carbon::parse($schedule->start_time))
+                <a id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
+              @else
+                <a style="display: none" id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
+              @endif 
+                  <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+                  <div class="card__content">
                   <p class="card__category"><time>{{ \Carbon\Carbon::parse($schedule->start_time)->format("h:i A") }}</time></p>
                   <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
-                </div>
-              </a>
+                  </div>
+                </a> -->
           @endforeach
             </div>
         </section>
@@ -151,5 +176,46 @@
 @section('scripts')
 <script>
   
+  var arrayevents = []
+  getevents()
+  
+  var checker = setInterval(showEventCard, 60000)
+
+  function getevents() {
+    $.ajax({
+      url: "{{ url('ajax/get/events/today') }}"
+    }).done(function(data) {
+        for(val in data) {
+          arrayevents.push( {
+            id:data[val].id,
+            time:moment(data[val].start_time)
+          })
+        }
+    });
+  }
+
+  function showEventCard() {
+    for(event in arrayevents) {
+      var start = arrayevents[event].time
+      
+      if(moment().isSameOrAfter(start)) {
+        $('#card-close-'+arrayevents[event].id).remove()
+        $('#event-card-'+arrayevents[event].id).show()
+        arrayevents.splice(event,1)
+        if(arrayevents.length==0)
+          clearInterval(checker)
+      }
+    }
+  }
+
+  function notyet() {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Oops, the event is still closed',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
 </script>
 @endsection
