@@ -13,7 +13,7 @@ class SettingSeeder extends Seeder
     public function run()
     {
         $settings = array(
-            array('id' => '1','key' => 'title','value' => 'PCP Ilocos-Abra Chapter','created_at' => '2020-10-24 05:19:45','updated_at' => '2020-10-24 05:19:45','deleted_at' => NULL),
+            array('id' => '1','key' => 'event_name','value' => 'PCP Ilocos-Abra Chapter','created_at' => '2020-10-24 05:19:45','updated_at' => '2020-10-24 05:19:45','deleted_at' => NULL),
             array('id' => '2','key' => 'subtitle','value' => '10-12 December, Downtown Conference Center, New York','created_at' => '2020-10-24 05:19:45','updated_at' => '2020-10-24 05:19:45','deleted_at' => NULL),
             array('id' => '3','key' => 'youtube_link','value' => 'https://www.youtube.com/watch?v=jDDaplaOz7Q','created_at' => '2020-10-24 05:19:45','updated_at' => '2020-10-24 05:19:45','deleted_at' => NULL),
             array('id' => '4','key' => 'about_description','value' => 'PCP-IAC 1st Virtual Post Graduate Course with the Theme: "Living with the Enemy"','created_at' => '2020-10-24 05:19:45','updated_at' => '2020-10-24 05:19:45','deleted_at' => NULL),
