@@ -131,40 +131,33 @@
         <div role="tabpanel" class="col tab-pane fade{{ $key === 1 ? ' show active' : '' }}" id="day-{{ $key }}">
           <section class="hero-section">
             <div class="card-grid">
-          @foreach($day as $schedule)
-            @if(Carbon\Carbon::now() >= Carbon\Carbon::parse($schedule->start_time))
-              <a id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
-            @else
+            @foreach($day as $schedule)
+              @if(Carbon\Carbon::now()->gte(Carbon\Carbon::parse($schedule->start_time)))
+                <a id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
+                  <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+                <div class="card__content">
+                    <p class="card__category"><time>OPEN NOW</time></p>
+                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                    </div>
+                </a>
+              @else
               <a style="display: none" id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
-              <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+                <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
               <div class="card__content">
                   <p class="card__category"><time>OPEN NOW</time></p>
                   <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
                   </div>
               </a>
-              
-              <a class="card" id="card-close-{{ $schedule->id }}" onclick="notyet()" href="javascript:void(0)">
-              <div class="card__background" style="background-image: url(https://cdn4.vectorstock.com/i/1000x1000/71/73/clock-icon-isolated-on-grey-background-time-icon-vector-20907173.jpg)"></div>
-              <div class="card__content">
-                  <p class="card__category"><time>Starts on {{ \Carbon\Carbon::parse($schedule->start_time)->format("g:i A") }}</time></p>
-                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
-                  </div>
-                </a>
-            @endif
 
-                
-              <!-- @if(Carbon\Carbon::now() >= Carbon\Carbon::parse($schedule->start_time))
-                <a id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
-              @else
-                <a style="display: none" id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
-              @endif 
-                  <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
-                  <div class="card__content">
-                  <p class="card__category"><time>{{ \Carbon\Carbon::parse($schedule->start_time)->format("h:i A") }}</time></p>
-                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
-                  </div>
-                </a> -->
-          @endforeach
+                <a class="card" id="card-close-{{ $schedule->id }}" onclick="notyet()" href="javascript:void(0)">
+                <div class="card__background" style="background-image: url(https://cdn4.vectorstock.com/i/1000x1000/71/73/clock-icon-isolated-on-grey-background-time-icon-vector-20907173.jpg)"></div>
+                <div class="card__content">
+                    <p class="card__category"><time>Starts on {{ \Carbon\Carbon::parse($schedule->start_time)->format("g:i A") }}</time></p>
+                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                </div>
+                </a>
+              @endif
+            @endforeach
             </div>
         </section>
         </div>
@@ -179,7 +172,7 @@
   var arrayevents = []
   getevents()
   
-  var checker = setInterval(showEventCard, 60000)
+  var checker = setInterval(showEventCard, 50000)
 
   function getevents() {
     $.ajax({
@@ -203,7 +196,7 @@
         $('#event-card-'+arrayevents[event].id).show()
         arrayevents.splice(event,1)
         if(arrayevents.length==0)
-          clearInterval(checker)
+        clearInterval(checker)
       }
     }
   }
