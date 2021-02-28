@@ -9,6 +9,7 @@ use App\Member;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -78,7 +79,7 @@ class RegisterController extends Controller
         // ]);
         $member_id=$data['member_id'];
         if($member_id==null) {
-            $member_id = randomStr(10);
+            $member_id = Str::random(10);
             $data = array_merge($data, array(
                 'member_id' => $member_id
             ));

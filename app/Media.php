@@ -25,4 +25,8 @@ class Media extends Model
     public function shedule() {
         return $this->belongsTo(Schedule::class,'id','schedule_id');
     }
+
+    public function event() {
+        return $this->hasOne(Schedule::class,'id','schedule_id');
+    }
 }

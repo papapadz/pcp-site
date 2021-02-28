@@ -5,7 +5,7 @@
       <h1>
         <a href="{{ route('home') }}#intro">
           <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-          {{ $settings['event_name'] }}
+          <b style="font-size: 6vmin">{{ $settings['event_name'] }}</b>
         </a>
       </h1>
     </div>

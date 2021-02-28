@@ -20,8 +20,6 @@ class Schedule extends Model
         'day_number',
         'start_time',
         'speaker_id',
-        'created_at',
-        'updated_at',
         'deleted_at',
     ];
 

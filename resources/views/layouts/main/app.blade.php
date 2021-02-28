@@ -20,13 +20,42 @@
   <link href="{{ asset('lib/css/hover-min.css') }}" rel="stylesheet">
   <!-- Main Stylesheet File -->
   <link href="{{ asset('lib/css/style.css') }}" rel="stylesheet">
+  <style>
+  .float{
+    height:60px;
+    bottom:40px;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    
+  }
 
+  .my-float{
+    margin-top:15px;
+  }
+
+  .back {
+    left: 40px;
+    position: absolute;
+    top:100px;
+    width:100px;
+    background-color:#0C9;
+  }
+
+  .next {
+    position:fixed;
+    font-size: 4vmin;
+    width: 100%;
+    background-color:#dac527;
+  }
+  </style>
   @yield('styles')
 </head>
 
 <body>
   @include('partials.header')
-
+  
   @yield('content')
 
   @include('partials.footer')

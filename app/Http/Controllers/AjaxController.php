@@ -13,6 +13,7 @@ use Carbon\Carbon as Carbon;
 class AjaxController extends Controller
 {
     public function geteventstoday() {
-        return Schedule::whereDate('start_time','2021-01-29')->get();
+        //return Schedule::whereDate('start_time','2021-01-29')->get();
+        return Schedule::get();
     }
 }

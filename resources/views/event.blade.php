@@ -220,60 +220,70 @@ strong {
 
 @media only screen and (max-width: 1366px) {
  
- .canvas-wrapper {
+ .canvas-wrapper, .float{
    transform: scale(0.8);
  }
 }
 
 @media only screen and (max-width: 1080px) {
  
- .canvas-wrapper {
+ .canvas-wrapper, .float{
    transform: scale(0.75);
  }
 }
 
 @media only screen and (max-width: 1020px) {
  
- .canvas-wrapper {
+ .canvas-wrapper, .schedule-title{
    transform: scale(0.7);
  }
 }
 
 @media only screen and (max-width: 900px) {
  
- .canvas-wrapper {
+ .canvas-wrapper{
    transform: scale(0.55);
  }
 }
 
 @media only screen and (max-width: 750px) {
  
- .canvas-wrapper {
+ .canvas-wrapper{
    transform: scale(0.5);
  }
 }
 
 @media only screen and (max-width: 640px) {
  
-  .canvas-wrapper {
+  .canvas-wrapper{
     transform: scale(0.45);
   }
 }
 
 @media only screen and (max-width: 600) {
  
- .canvas-wrapper {
+ .canvas-wrapper{
    transform: scale(0.25);
  }
 }
-
 </style>
 @endsection
 
 @section('content')
+<br><br><hr>
+<div class="row schedule-title">
+  <div class="col-12 container">
+    <a href="{{ url('home#schedule') }}" class="btn btn-primary float-left ml-4">
+      <i class="fa fa-arrow-left"></i> Back
+    </a>
+    <center><h3 class="float-center"><b>{{ $schedule->title }}</b></h3></center>
+  </div>
+</div>  
 <section id="intro">
   <div class="intro-container fadeIn" id="meet">
+  
     <div class="canvas-wrapper row">
+      
       @foreach($schedule->media as $media)
      <div class="col-md-4 col-sm-12">
       <a href="{{ url('meeting/'.$media->id) }}" class="canvas">
@@ -316,6 +326,11 @@ strong {
     @endforeach
     </div>
   </div>
-  <audio loop controls autoplay src="{{ asset('lib/audio/bgmusic2.mp3') }}" type="audio/mpeg"></audio>
+  @if(isset($next))
+  <a href="{{ url('event/'.$next->id) }}" class="float btn next" style="height: 10vmin">
+    <span class="text-white"><i class="fa fa-exclamation"></i> Up next: <b> {{ $next->title }}</b></span>
+  </a>
+  @endif
+  <audio hidden loop controls autoplay src="{{ asset('lib/audio/bgmusic2.mp3') }}" type="audio/mpeg"></audio>
 </section>
 @endsection
