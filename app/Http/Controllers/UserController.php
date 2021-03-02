@@ -7,6 +7,7 @@ use App\Member;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Mail\MyMail;
 
 class UserController extends Controller
 {
@@ -66,9 +67,14 @@ class UserController extends Controller
     public function update(UserRequest $request, User  $user)
     {
         
-        $user->update([
-            'email_verified_at' => Carbon::now()->toDateTimeString()
-        ]);
+        if($user->email_verified_at==null) {
+            $user->update([
+                'email_verified_at' => Carbon::now()->toDateTimeString()
+            ]);
+
+            \Mail::to('benpadz08@gmail.com')->send(new MyMail());
+        }
+
         $user->member->update([
             'member_id' => $request->member_id,
             'first_name' => $request->first_name,
