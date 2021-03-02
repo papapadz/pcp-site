@@ -23,6 +23,10 @@ class Member extends Model
     ];
 
     public function user() {
-        return $this->belongsTo(User::class,'member_id','member_id');
+        return $this->belongsTo(User::class,'member_id');
+    }
+
+    public function views() {
+        return $this->hasMany(View::class,'member_id');
     }
 }

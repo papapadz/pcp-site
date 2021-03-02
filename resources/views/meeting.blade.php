@@ -17,12 +17,9 @@
     @else
       @include('video')
     @endif
-    <a href="{{ $next_url }}" class="float btn next" style="height: 10vmin">
-      <span class="text-white"><i class="fa fa-exclamation"></i> Up next: <b>{{ $next_title }}</b></span>
+    <a id="upNext" href="{{ $next_url }}" class="float btn next" style="height: 10vmin; display:none" >
+      <span class="text-white" style="height: 10vmin"><i class="fa fa-exclamation"></i> Up next: <b>{{ $next_title }}</b></span>
     </a>
   </div>
 </section>
-@endsection
-
-@section('script')
 @endsection

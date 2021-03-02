@@ -4,22 +4,34 @@
 <div class="container" style="height: auto;">
   <div class="row">
       <div class="col-md-8">
-        <div class="card" style="width: 100%;">
-          <img class="card-img-top" src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80" rel="nofollow" alt="Card image cap">
+        <div class="card card-nav-tabs" style="width: 100%;">
+          <img class="card-img-top" style="height: 70vmin" src="{{ asset('media/banners/banner.jpg') }}" rel="nofollow" alt="Card image cap">
           <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">Philippine College of Physicians Ilocos Abra Chapter, 1st Virtual Post Graduate Course 2021, March 12 to 13, 2021</p>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card card-nav-tabs" style="width: 20rem;">
-          <div class="card-header card-header-danger">
-            Featured  
+          <div class="card-header card-header-primary">
+            Technical Requirements
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item">Device: for better viewing experience, we recommend the use of laptops and desktops rather than mobile phones</li>
+            <li class="list-group-item">Internet browsers: Google Chrome, Microsoft Edge or Safari</li>
+            <li class="list-group-item">Bandwidth: it would be best to have at least 2 mbps connection for best results with live-streaming</li>
+          </ul>
+        </div>
+        <hr>
+        <div class="card card-nav-tabs" style="width: 20rem;">
+          <div class="card-header card-header-danger">
+            Reminders during the virtual meeting
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Please take note of the time allotted per lecture</li>
+            <li class="list-group-item">Turn off your webcam and microphone</li>
+            <li class="list-group-item">Wait your turn. Queue up your questions in the Chat box or raise your hand</li>
+            <li class="list-group-item">The chat should not be used for random conversation</li>
           </ul>
         </div>
       </div>

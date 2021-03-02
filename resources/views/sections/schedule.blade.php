@@ -101,11 +101,12 @@
 
 .card__heading{
   color: var(--text-lighter);
-  font-size: 1.9rem;
+  font-size: 1.4rem;
   text-shadow: 2px 2px 20px rgba(0,0,0,0.2);
-  line-height: 1.4;
-  word-spacing: 100vw;
+  line-height: 1;
+  word-spacing: 80vw;
 }
+
 </style>
 @endsection
 
@@ -137,7 +138,7 @@
                   <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
                 <div class="card__content">
                     <p class="card__category"><time>OPEN NOW</time></p>
-                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker) <i>by {{ $schedule->speaker->name }}</i>@endif</h3>
                     </div>
                 </a>
               @else
@@ -145,7 +146,7 @@
                 <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
               <div class="card__content">
                   <p class="card__category"><time>OPEN NOW</time></p>
-                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker) <i>by {{ $schedule->speaker->name }}</i>@endif</h3>
                   </div>
               </a>
 
@@ -153,7 +154,7 @@
                 <div class="card__background" style="background-image: url(https://cdn4.vectorstock.com/i/1000x1000/71/73/clock-icon-isolated-on-grey-background-time-icon-vector-20907173.jpg)"></div>
                 <div class="card__content">
                     <p class="card__category"><time>Starts on {{ \Carbon\Carbon::parse($schedule->start_time)->format("g:i A") }}</time></p>
-                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker)<span>{{ $schedule->speaker->name }}</span>@endif</h3>
+                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker) <i>by {{ $schedule->speaker->name }}</i>@endif</h3>
                 </div>
                 </a>
               @endif

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 use Carbon\Carbon;
+use Auth;
 use App\Setting;
 use App\Speaker;
 use App\Schedule;
 use App\Media;
 use App\User;
+use App\View;
 
 class HomeController extends Controller
 {
@@ -38,9 +40,10 @@ class HomeController extends Controller
         if(Carbon::now()->gte($event_time)) {
             $settings = Setting::pluck('value', 'key');
             $user_pending = User::where('email_verified_at',null)->count();
-            $next = Schedule::select('id','title')->where([['start_time','>',$event_time->toDateTimeString()],['day_number',$schedule->day_number]])->first();
-  
-            return view('event', compact('settings','schedule','user_pending','next'));
+            $next = Schedule::select('id','title','start_time')->where([['start_time','>',$event_time->toDateTimeString()],['day_number',$schedule->day_number]])->first();
+            $counter = Carbon::now()->diffInSeconds($next->start_time);
+
+            return view('event', compact('settings','schedule','user_pending','next','counter'));
         }
         return redirect()->route('home');
     }
@@ -53,6 +56,11 @@ class HomeController extends Controller
         $user_pending = User::where('email_verified_at',null)->count();
         $mins = $media->mins;
         
+        if($media->type != 2)
+            View::create([
+                'member_id' => Auth::user()->member_id, 'media_id' => $media->id
+            ]);
+
         $next = $next_url = $next_title = null;
         if(count($schedule)==1 || $media->type == 3) {
             $next = Schedule::select('id','title')->where([['start_time','>',Carbon::parse($media->event->start_time)->toDateTimeString()],['day_number',$media->event->day_number]])->first();
@@ -67,8 +75,9 @@ class HomeController extends Controller
             else
                 $next_title = 'Product Presentation';   
         }
-            
+        
+        $counter = Carbon::now()->diffInMilliseconds($next->start_time);
 
-        return view('meeting', compact('media','settings','user_pending','mins','next_url','next_title'));
+        return view('meeting', compact('media','settings','user_pending','mins','next_url','next_title','counter'));
     }
 }

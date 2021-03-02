@@ -33,7 +33,6 @@ Route::group(['middleware' => ['auth']], function () {
 	});
 	
 	Route::get('ajax/get/events/today','AjaxController@geteventstoday');
-
 	// Route::get('table-list', function () {
 	// 	return view('pages.table_list');
 	// })->name('table');

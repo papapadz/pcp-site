@@ -145,7 +145,7 @@
                       <span class="form-check-sign">
                         <span class="check"></span>
                       </span>
-                      {{ __('I agree with the ') }} <a href="#">{{ __('Privacy Policy') }}</a>
+                      {{ __('I agree with the ') }} <a target="_blank" href="{{ url('docs/Privacy-Policy.pdf') }}">{{ __('Privacy Policy') }}</a>
                     </label>
                   </div>
               </div>

@@ -4,7 +4,7 @@
   <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
   @if(session()->has('not_verified'))
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Oops!</strong> Your email address has yet to be verified, please wait for our verification and log in again.
+    <strong>Oops!</strong> Your email address has yet to be verified, please wait for our verification through your registered email address and log in again.
   </div>
   @endif
     @yield('content')

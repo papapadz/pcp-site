@@ -334,3 +334,23 @@ strong {
   <audio hidden loop controls autoplay src="{{ asset('lib/audio/bgmusic2.mp3') }}" type="audio/mpeg"></audio>
 </section>
 @endsection
+
+@section('scripts')
+<script>
+var counter = parseInt('{{ $counter }}')
+    console.log(counter)
+    initial()
+    
+    function initial() {
+        if(counter>0)
+            setInterval(showUpNext, counter)
+        else
+            showUpNext()
+    }
+
+    function showUpNext() {
+        var x = document.getElementById("upNext")
+        x.style.display = 'block'
+    }
+</script>
+@endsection
