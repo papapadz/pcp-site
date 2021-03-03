@@ -17,6 +17,7 @@ class CreateViewsTable extends Migration
             $table->bigIncrements('id');
             $table->string('member_id',20);
             $table->bigInteger('media_id');
+            $table->string('media_table',20);
             $table->timestamps();
         });
     }

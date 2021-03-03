@@ -7,7 +7,7 @@
     <a href="{{ url('home#schedule') }}" class="btn btn-primary float-left ml-4">
       <i class="fa fa-arrow-left"></i> Back
     </a>
-    <center><h3 class="float-center"><b>adasdasdsa</b></h3></center>
+    <center><h3 class="float-center"><b>{{ $schedule->title }}</b></h3></center>
   </div>
 </div> 
 <section id="intro">
@@ -22,4 +22,24 @@
     </a>
   </div>
 </section>
+@endsection
+
+@section('scripts')
+<script>
+  var counter = parseInt('{{ $counter }}')
+    console.log(counter)
+    initial()
+    
+    function initial() {
+        if(counter>0)
+            setInterval(showUpNext, counter)
+        else
+            showUpNext()
+    }
+
+    function showUpNext() {
+        var x = document.getElementById("upNext")
+        x.style.display = 'block'
+    }
+</script>
 @endsection

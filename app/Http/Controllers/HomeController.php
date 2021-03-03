@@ -9,6 +9,7 @@ use App\Schedule;
 use App\Media;
 use App\User;
 use App\View;
+use App\Sponsor;
 
 class HomeController extends Controller
 {
@@ -26,10 +27,12 @@ class HomeController extends Controller
             ->orderBy('start_time', 'asc')
             ->get()
             ->groupBy('day_number');
+        $sponsors = Sponsor::all();
+
         $user_pending = User::where('email_verified_at',null)->count();
 
         return view('home',compact(
-            'settings','speakers','schedules','user_pending'
+            'settings','speakers','schedules','user_pending','sponsors'
         ));
     }
 
@@ -58,7 +61,7 @@ class HomeController extends Controller
         
         if($media->type != 2)
             View::create([
-                'member_id' => Auth::user()->member_id, 'media_id' => $media->id
+                'member_id' => Auth::user()->member_id, 'media_id' => $media->id, 'media_table' => 'main'
             ]);
 
         $next = $next_url = $next_title = null;
@@ -79,5 +82,19 @@ class HomeController extends Controller
         $counter = Carbon::now()->diffInMilliseconds($next->start_time);
 
         return view('meeting', compact('media','settings','user_pending','mins','next_url','next_title','counter'));
+    }
+
+    public function sponsor($id) {
+        
+        $sponsor = Sponsor::find($id);
+        
+        View::create([
+            'member_id' => Auth::user()->member_id, 'media_id' => $sponsor->id, 'media_table' => 'avp'
+        ]);
+        
+        $user_pending = User::where('email_verified_at',null)->count();
+        $settings = Setting::pluck('value', 'key');
+        
+        return view('sponsor-avp',compact('settings','user_pending','sponsor'));
     }
 }

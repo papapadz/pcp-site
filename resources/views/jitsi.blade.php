@@ -2,21 +2,6 @@
 {{-- <script src="https://meet.jit.si/external_api.js"></script> --}}
 <script src="https://8x8.vc/libs/external_api.min.js"></script>
 <script>
-    var counter = parseInt('{{ $counter }}')
-    console.log(counter)
-    initial()
-    
-    function initial() {
-        if(counter>0)
-            setInterval(showUpNext, counter)
-        else
-            showUpNext()
-    }
-
-    function showUpNext() {
-        var x = document.getElementById("upNext")
-        x.style.display = 'block'
-    }
     
     var customOptions = [
                 'microphone', 'camera', 'closedcaptions', 'fullscreen',

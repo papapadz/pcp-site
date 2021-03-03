@@ -6,13 +6,13 @@
     </div>
 
     <div class="row no-gutters supporters-wrap clearfix">
-      {{-- @foreach($sponsors as $sponsor)
+      @foreach($sponsors as $sponsor)
         <div class="col-lg-3 col-md-4 col-xs-6">
           <div class="supporter-logo">
-            <img src="{{ $sponsor->logo->getUrl() }}" class="img-fluid" alt="{{ $sponsor->name }}">
+            <a href="{{ url('avp/'.$sponsor->id) }}"><img src="{{ url($sponsor->logo) }}" class="img-fluid" alt="{{ $sponsor->name }}"></a>
           </div>
         </div>
-      @endforeach --}}
+      @endforeach
     </div>
 
   </div>
