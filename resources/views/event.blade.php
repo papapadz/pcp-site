@@ -298,7 +298,7 @@ strong {
             @if($media->type==1)
                 src="{{ url('lib/img/video.png') }}" 
             @elseif($media->type==2)
-                src="{{ url('lib/img/qanda.png') }}" 
+                src="{{ url('lib/img/live.jpg') }}" 
             @else
                 src="{{ url('lib/img/product.png') }}" 
             @endif
@@ -326,8 +326,8 @@ strong {
     @endforeach
     </div>
   </div>
-  @if(isset($next))
-  <a href="{{ url('event/'.$next->id) }}" class="float btn next" style="height: 10vmin">
+  @if($next)
+  <a id="upNext" href="{{ url('event/'.$next->id) }}" class="float btn next" style="height: 10vmin; display: none;">
     <span class="text-white"><i class="fa fa-exclamation"></i> Up next: <b> {{ $next->title }}</b></span>
   </a>
   @endif
@@ -338,12 +338,13 @@ strong {
 @section('scripts')
 <script>
 var counter = parseInt('{{ $counter }}')
+var checker
     console.log(counter)
     initial()
     
     function initial() {
         if(counter>0)
-            setInterval(showUpNext, counter)
+            checker = setInterval(showUpNext, counter)
         else
             showUpNext()
     }
@@ -351,6 +352,7 @@ var counter = parseInt('{{ $counter }}')
     function showUpNext() {
         var x = document.getElementById("upNext")
         x.style.display = 'block'
+        clearInterval(checker)
     }
 </script>
 @endsection

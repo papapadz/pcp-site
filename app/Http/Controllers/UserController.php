@@ -8,6 +8,8 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Mail\MyMail;
+use App\Schedule;
+use App\Speaker;
 
 class UserController extends Controller
 {
@@ -19,7 +21,7 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        return view('users.index', ['users' => $model->paginate(15)]);
+        return view('users.index', ['users' => $model->join('members','users.member_id','members.member_id')->orderBy('email_verified_at')->orderBy('last_name')->paginate(15)]);
     }
 
     /**
@@ -54,7 +56,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $schedules = Schedule::join('media','media.schedule_id','=','schedules.id')->where('type',1)->get();
+        
+        return view('users.edit', compact('user','schedules'));
     }
 
     /**
@@ -69,10 +73,14 @@ class UserController extends Controller
         
         if($user->email_verified_at==null) {
             $user->update([
-                'email_verified_at' => Carbon::now()->toDateTimeString()
+                'email_verified_at' => Carbon::now()->toDateTimeString(),
+                'role' => $request->role
             ]);
 
-            \Mail::to('benpadz08@gmail.com')->send(new MyMail());
+            if($request->role==2)
+                Speaker::where('id',$request->speaker)->update(['member_id' => $request->member_id]);
+
+            \Mail::to($user->email)->send(new MyMail());
         }
 
         $user->member->update([

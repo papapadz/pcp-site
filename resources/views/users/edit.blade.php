@@ -136,6 +136,27 @@
                   </div>
                 </div>
                 <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Role') }}</label>
+                  <div class="col-sm-7">
+                    <select id="role" name="role" class="form-control">
+                      <option selected value=1>Guest</option>
+                      <option value=2>Speaker</option>
+                      <option value=3>Admin</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Lecture') }}</label>
+                  <div class="col-sm-7">
+                    <select name="speaker" class="form-control">
+                      <option selected>N/A</option>
+                      @foreach($schedules as $schedule)
+                        <option value={{ $schedule->speaker_id }}>{{ $schedule->title }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Remarks') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('remarks') ? ' has-danger' : '' }}">

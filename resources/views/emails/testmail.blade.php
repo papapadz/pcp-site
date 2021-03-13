@@ -20,8 +20,9 @@
     <ul class="list-group list-group-flush">
         <li>Please take note of the time allotted per lecture</li>
         <li>Turn off your webcam and microphone</li>
-        <li>Wait your turn. Queue up your questions in the Chat box or raise your hand</li>
-        <li>The chat should not be used for random conversation</li>
+        <li>Wait for your turn. Queue up your questions in the Chat box or raise your hand</li>
+        <li>5 minute break for sponsor booth visit is allotted after each lecture</li>
+        <li>The chat is intended for questions addressed to the speaker</li>
       </ul>
     <p></p>
     <p>See you in this virtual event! Thank you.</p>

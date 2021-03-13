@@ -4,10 +4,10 @@
 <br><br><hr>
 <div class="row schedule-title">
   <div class="col-12 container">
-    <a href="{{ url('home#schedule') }}" class="btn btn-primary float-left ml-4">
+    <a href="{{ url('event/'.$media->event->id) }}" class="btn btn-primary float-left ml-4">
       <i class="fa fa-arrow-left"></i> Back
     </a>
-    <center><h3 class="float-center"><b>{{ $schedule->title }}</b></h3></center>
+    <center><h3 class="float-center"><b>{{ $media->event->title }}</b></h3></center>
   </div>
 </div> 
 <section id="intro">
@@ -27,12 +27,13 @@
 @section('scripts')
 <script>
   var counter = parseInt('{{ $counter }}')
+  var checker
     console.log(counter)
     initial()
     
     function initial() {
         if(counter>0)
-            setInterval(showUpNext, counter)
+            checker = setInterval(showUpNext, counter)
         else
             showUpNext()
     }
@@ -40,6 +41,7 @@
     function showUpNext() {
         var x = document.getElementById("upNext")
         x.style.display = 'block'
+        clearInterval(checker)
     }
 </script>
 @endsection

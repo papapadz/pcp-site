@@ -5,9 +5,18 @@
   <div class="row">
       <div class="col-md-8">
         <div class="card card-nav-tabs" style="width: 100%;">
-          <img class="card-img-top" style="height: 70vmin" src="{{ asset('media/banners/banner.jpg') }}" rel="nofollow" alt="Card image cap">
+          <div class="card-header card-header-warning">
+            Click Here to <b><a href="{{ url('login') }}">LOGIN!</a></b>
+          </div>
           <div class="card-body">
-            <p class="card-text">Philippine College of Physicians Ilocos Abra Chapter, 1st Virtual Post Graduate Course 2021, March 12 to 13, 2021</p>
+            <div class="row">
+              <div class="col-12">
+                <img style="height: 70vmin" src="{{ asset('media/banners/banner.jpg') }}" rel="nofollow" alt="Card image cap">
+          
+                <p class="card-text">Philippine College of Physicians Ilocos Abra Chapter, 1st Virtual Post Graduate Course 2021, March 12 to 13, 2021</p>
+              
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -30,8 +39,9 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Please take note of the time allotted per lecture</li>
             <li class="list-group-item">Turn off your webcam and microphone</li>
-            <li class="list-group-item">Wait your turn. Queue up your questions in the Chat box or raise your hand</li>
-            <li class="list-group-item">The chat should not be used for random conversation</li>
+            <li class="list-group-item">Wait for your turn. Queue up your questions in the Chat box or raise your hand</li>
+            <li class="list-group-item">5 minute break for sponsor booth visit is allotted after each lecture</li>
+            <li class="list-group-item">The chat is intended for questions addressed to the speaker</li>
           </ul>
         </div>
       </div>

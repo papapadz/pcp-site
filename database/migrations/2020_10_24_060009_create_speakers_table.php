@@ -15,6 +15,7 @@ class CreateSpeakersTable extends Migration
     {
         Schema::create('speakers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('member_id',20)->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('twitter')->nullable();

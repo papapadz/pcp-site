@@ -1,10 +1,26 @@
 @extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'login', 'title' => __('Material Dashboard')])
 
 @section('content')
+<style>
+  p {
+    white-space: pre-line
+  },
+  p.h1 {
+    font-size: 40px;
+  },
+  p.h2 {
+    font-size: 55px;
+  }
+</style>
 <div class="container" style="height: auto;">
   <div class="row align-items-center">
     <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
-      <h3>{{ __('Log in access video lectures, participate in Q&As, raffles and more.') }} </h3>
+      <p class="text-white h2"><strong>{{ __('WELCOME!') }}</strong>
+      {{ __('to the') }}
+      {{ __('PCP IAC and MMMH&MC 1ST VIRTUAL') }}
+      {{ __('POSTGRADUATE COURSE') }}
+    
+      <strong>{{ __('I.M MOVING FORWARD') }}</strong> </p>
     </div>
     <div class="col-lg-4 col-md-8 col-sm-8 ml-auto mr-auto">
       <form class="form" method="POST" action="{{ route('login') }}">

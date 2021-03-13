@@ -4,6 +4,9 @@
 @include('sections.intro')
 
 <main id="main">
+  
+  @include('sections.faq')
+
   @include('sections.about')
 
   @include('sections.schedule')
@@ -18,8 +21,7 @@
 
   @include('sections.sponsors')
 
-  {{-- @include('sections.faq') --}}
-
+  
   {{-- @include('sections.subscribe') --}}
 
   {{-- @include('sections.buy_ticket') --}}

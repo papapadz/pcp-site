@@ -16,6 +16,7 @@ class Speaker extends Model
     ];
 
     protected $fillable = [
+        'member_id',
         'name',
         'twitter',
         'facebook',
@@ -30,5 +31,10 @@ class Speaker extends Model
     public function schedules()
     {
         return $this->hasMany(Schedule::class, 'speaker_id', 'id');
+    }
+
+    public function schedule()
+    {
+        return $this->hasOne(Schedule::class, 'speaker_id', 'id')->with('media');
     }
 }

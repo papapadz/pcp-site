@@ -27,6 +27,12 @@
           <span class="badge bg-success p-1">{{$user_pending}}</span>
           @endif</a>
         </li>
+        @elseif(Auth::user()->role==2)
+          @if($speakerdashboard)
+            <li>
+              <a href="{{ url('meeting/'.$speakerdashboard->id) }}"><span class="badge bg-danger p-1">!</span> My Session</a>
+            </li>
+          @endif
         @endif
         {{-- <li><a href="{{ Route::current()->getName() != 'home' ? route('home') : '' }}#contact">Contact</a></li> --}}
         <li class="buy-tickets"><a href="{{ url('logout') }}">Log Out</a></li>

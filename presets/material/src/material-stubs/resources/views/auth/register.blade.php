@@ -22,7 +22,7 @@
               </a>
             </div>
           </div>
-          <div class="card-body ">
+          <div class="card-body" id="registrationform">
             <p class="card-description text-center">{{ __('Or Be Classical') }}</p>
             <div class="bmd-form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
               <div class="input-group">
@@ -102,4 +102,10 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+  alert('adasdsa')
+</script>
 @endsection

@@ -22,6 +22,7 @@ class CreateMediaTable extends Migration
             $table->bigInteger('schedule_id');
             $table->integer('type');
             $table->integer('views')->default(0);
+            $table->integer('duration')->default(5);
             $table->string('url');
             $table->timestamps();
             $table->softDeletes();

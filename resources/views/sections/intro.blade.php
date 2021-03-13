@@ -3264,9 +3264,7 @@
   <div class="counter"></div>
 </div>
 
-
   </div>
-  
 </section>
 
 <script src="js/sprites.js"></script>

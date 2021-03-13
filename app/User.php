@@ -39,6 +39,6 @@ class User extends Authenticatable
     ];
 
     public function member() {
-        return $this->hasOne(Member::class,'member_id','member_id');
+        return $this->hasOne(Member::class,'member_id','member_id')->with('speaker');
     }
 }

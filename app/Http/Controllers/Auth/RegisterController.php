@@ -51,7 +51,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             // 'name' => ['required', 'string', 'max:255'],
             //'member_id' => ['string','unique:members'],
             'first_name' => ['required', 'string'],
@@ -60,6 +60,10 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+        if($validator)
+            return $validator;
+            
+        return false;
     }
 
     /**

@@ -8,7 +8,8 @@
             <div class="card">
               <div class="card-header card-header-primary">
                 <h4 class="card-title ">{{ __('List of Registered Attendees') }}</h4>
-              <p class="card-category"> {{ __('Awaiting Confirmations: ') }} <b>{{ $users->where('email_verified_at','=',null)->count() }}</b></p>
+                <p class="card-category"> {{ __('Awaiting Confirmations: ') }} <b>{{ $users->where('email_verified_at','=',null)->count() }}</b></p>
+              
               </div>
               <div class="card-body">
                 @if (session('status'))
@@ -30,6 +31,7 @@
                 </div> --}}
                 <div class="table-responsive">
                   <table class="table">
+                    {{ $users->links() }} 
                     <thead class=" text-primary">
                       <th>
                         {{ __('Member ID') }}
@@ -102,6 +104,7 @@
                       @endforeach
                     </tbody>
                   </table>
+                  {{ $users->links() }}
                 </div>
               </div>
             </div>

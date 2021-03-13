@@ -26,6 +26,10 @@ class Member extends Model
         return $this->belongsTo(User::class,'member_id');
     }
 
+    public function speaker() {
+        return $this->hasOne(Speaker::class,'member_id')->with('schedule');
+    }
+
     public function views() {
         return $this->hasMany(View::class,'member_id');
     }

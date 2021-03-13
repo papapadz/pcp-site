@@ -22,7 +22,7 @@ class HomeController extends Controller
     public function index()
     {   
         $settings = Setting::pluck('value', 'key');
-        $speakers = Speaker::all();
+        $speakers = Speaker::where('member_id','!=',null)->get();
         $schedules = Schedule::with('speaker')
             ->orderBy('start_time', 'asc')
             ->get()
@@ -30,9 +30,12 @@ class HomeController extends Controller
         $sponsors = Sponsor::all();
 
         $user_pending = User::where('email_verified_at',null)->count();
-
+        $speakerdashboard = null;
+        if(Auth::User()->role==2)
+            $speakerdashboard = Auth::user()->member->speaker->schedule->media->where('type',2)->first();
+        
         return view('home',compact(
-            'settings','speakers','schedules','user_pending','sponsors'
+            'settings','speakers','schedules','user_pending','sponsors','speakerdashboard'
         ));
     }
 
@@ -40,13 +43,22 @@ class HomeController extends Controller
         
         $schedule = Schedule::find($id);
         $event_time = Carbon::parse($schedule->start_time);
-        if(Carbon::now()->gte($event_time)) {
+        if(Auth::user()->role==3 || Carbon::now()->gte($event_time)) {
             $settings = Setting::pluck('value', 'key');
             $user_pending = User::where('email_verified_at',null)->count();
             $next = Schedule::select('id','title','start_time')->where([['start_time','>',$event_time->toDateTimeString()],['day_number',$schedule->day_number]])->first();
-            $counter = Carbon::now()->diffInSeconds($next->start_time);
-
-            return view('event', compact('settings','schedule','user_pending','next','counter'));
+            $speakerdashboard = null;
+            $counter = 0;
+            if($next) {
+                if(Auth::User()->role==2)
+                    $speakerdashboard = Auth::user()->member->speaker->schedule->media->where('type',2)->first();
+                if(Carbon::now()->gte($next->start_time))
+                    $counter = 0;
+                else
+                    $counter = Carbon::now()->diffInSeconds($next->start_time);    
+            }
+            
+            return view('event', compact('settings','schedule','user_pending','next','counter','speakerdashboard'));
         }
         return redirect()->route('home');
     }
@@ -57,8 +69,11 @@ class HomeController extends Controller
         $media = Media::find($id);
         $schedule = Media::where('schedule_id',$media->schedule_id)->get();
         $user_pending = User::where('email_verified_at',null)->count();
-        $mins = $media->mins;
-        
+        $counter = $media->duration * 60000;
+        $speakerdashboard = null;
+        if(Auth::User()->role==2)
+            $speakerdashboard = Auth::user()->member->speaker->schedule->media->where('type',2)->first();
+
         if($media->type != 2)
             View::create([
                 'member_id' => Auth::user()->member_id, 'media_id' => $media->id, 'media_table' => 'main'
@@ -67,8 +82,10 @@ class HomeController extends Controller
         $next = $next_url = $next_title = null;
         if(count($schedule)==1 || $media->type == 3) {
             $next = Schedule::select('id','title')->where([['start_time','>',Carbon::parse($media->event->start_time)->toDateTimeString()],['day_number',$media->event->day_number]])->first();
-            $next_url = url('event/'.$next->id);
-            $next_title = $next->title;
+            if($next) {
+                $next_url = url('event/'.$next->id);
+                $next_title = $next->title;
+            }
         } else {
             $type = $media->type + 1;
             $next = $schedule->where('type',$type)->first();
@@ -79,9 +96,7 @@ class HomeController extends Controller
                 $next_title = 'Product Presentation';   
         }
         
-        $counter = Carbon::now()->diffInMilliseconds($next->start_time);
-
-        return view('meeting', compact('media','settings','user_pending','mins','next_url','next_title','counter'));
+        return view('meeting', compact('media','settings','user_pending','next_url','next_title','counter','speakerdashboard'));
     }
 
     public function sponsor($id) {
@@ -94,7 +109,10 @@ class HomeController extends Controller
         
         $user_pending = User::where('email_verified_at',null)->count();
         $settings = Setting::pluck('value', 'key');
-        
-        return view('sponsor-avp',compact('settings','user_pending','sponsor'));
+        $speakerdashboard = null;
+        if(Auth::User()->role==2)
+            $speakerdashboard = Auth::user()->member->speaker->schedule->media->where('type',2)->first();
+            
+        return view('sponsor-avp',compact('settings','user_pending','sponsor','speakerdashboard'));
     }
 }

@@ -125,7 +125,7 @@
       @endforeach
     </ul>
 
-    <h3 class="sub-heading">After each lecture a Question and Answer forum will be open for 15 minutes and Product Presentation for 5 minutes.</h3>
+    <h3 class="sub-heading">Each lecture consists of an AVP, a Question and Answer forum and Product Presentation. A 5 minute break after each lecture shall be allocated for Booth Visits. An Online Evaluation will be provided on the last day of the event.</h3>
 
     <div class="tab-content row justify-content-center">
       @foreach($schedules as $key => $day)
@@ -133,28 +133,61 @@
           <section class="hero-section">
             <div class="card-grid">
             @foreach($day as $schedule)
-              @if(Carbon\Carbon::now()->gte(Carbon\Carbon::parse($schedule->start_time)))
+              @if(Auth::user()->role==3 || Carbon\Carbon::now()->gte(Carbon\Carbon::parse($schedule->start_time)))
                 <a id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
-                  <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+                  <div class="card__background" style="background-image: url({{ url('media/img/lecture-logo.jpg') }})"></div>
                 <div class="card__content">
                     <p class="card__category"><time>OPEN NOW</time></p>
-                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker) <i>by {{ $schedule->speaker->name }}</i>@endif</h3>
-                    </div>
+                    <h3 class="card__heading">{{ $schedule->title }} 
+                      @if($schedule->speaker) <i>
+                        @if($schedule->id!=22)
+                          @if($schedule->id==13 || $schedule->id==17 || $schedule->id==18 || $schedule->id==23)
+                            Moderator:
+                          @else
+                            Speaker:
+                          @endif
+                        {{ $schedule->speaker->name }}</i>
+                        @endif
+                      @endif 
+                    </h3>  
+                  </div>
                 </a>
               @else
               <a style="display: none" id="event-card-{{ $schedule->id }}" class="card" href="{{ url('event/'.$schedule->id) }}">
-                <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+                <div class="card__background" style="background-image: url({{ url('media/img/lecture-logo.jpg') }})"></div>
               <div class="card__content">
                   <p class="card__category"><time>OPEN NOW</time></p>
-                  <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker) <i>by {{ $schedule->speaker->name }}</i>@endif</h3>
+                  <h3 class="card__heading">{{ $schedule->title }} 
+                    @if($schedule->speaker) <i>
+                        @if($schedule->id!=22)
+                          @if($schedule->id==13 || $schedule->id==17 || $schedule->id==18 || $schedule->id==23)
+                            Moderator:
+                          @else
+                            Speaker:
+                          @endif
+                        {{ $schedule->speaker->name }}</i>
+                        @endif
+                      @endif 
+                  </h3>
                   </div>
               </a>
 
                 <a class="card" id="card-close-{{ $schedule->id }}" onclick="notyet()" href="javascript:void(0)">
                 <div class="card__background" style="background-image: url(https://cdn4.vectorstock.com/i/1000x1000/71/73/clock-icon-isolated-on-grey-background-time-icon-vector-20907173.jpg)"></div>
                 <div class="card__content">
-                    <p class="card__category"><time>Starts on {{ \Carbon\Carbon::parse($schedule->start_time)->format("g:i A") }}</time></p>
-                    <h3 class="card__heading">{{ $schedule->title }} @if($schedule->speaker) <i>by {{ $schedule->speaker->name }}</i>@endif</h3>
+                    <p class="card__category"><time>Starts at {{ \Carbon\Carbon::parse($schedule->start_time)->format("g:i A") }}</time></p>
+                    <h3 class="card__heading">{{ $schedule->title }} 
+                      @if($schedule->speaker) <i>
+                        @if($schedule->id!=22)
+                          @if($schedule->id==13 || $schedule->id==17 || $schedule->id==18 || $schedule->id==23)
+                            Moderator:
+                          @else
+                            Speaker:
+                          @endif
+                        {{ $schedule->speaker->name }}</i>
+                        @endif
+                      @endif   
+                    </h3>
                 </div>
                 </a>
               @endif

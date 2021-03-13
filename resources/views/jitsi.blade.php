@@ -16,6 +16,8 @@
         customOptions.push('recording')
         customOptions.push('livestreaming')
         customOptions.push('desktop')
+    } else if(userRole==2) {
+        customOptions.push('desktop')
     }
 
     var domain = "meet.jit.si";
