@@ -46,9 +46,9 @@
             TOOLBAR_BUTTONS: customOptions,
         },
         userInfo: {
-        email: '{{ Auth::user()->email }}',
-        displayName: '{{ Auth::user()->member->first_name }} '+'{{ Auth::user()->member->last_name }}'
-    }
+            email: '{{ Auth::user()->email }}',
+            displayName: '{{ Auth::user()->member->first_name }} '+'{{ Auth::user()->member->last_name }}'
+        }
     }
     var api = new JitsiMeetExternalAPI(domain, options);
 </script>
